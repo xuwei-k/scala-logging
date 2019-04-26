@@ -33,7 +33,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isErrorEnabled) {
+            $underlying.error($canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+            $canLogEv.afterLog($a)
+          }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isErrorEnabled) {
             $underlying.error($canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
             $canLogEv.afterLog($a)
@@ -70,7 +75,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isErrorEnabled($marker)) {
+          $underlying.error($marker, $canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+          $canLogEv.afterLog($a)
+        }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isErrorEnabled($marker)) {
           $underlying.error($marker, $canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
           $canLogEv.afterLog($a)
@@ -109,7 +119,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isWarnEnabled) {
+            $underlying.warn($canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+            $canLogEv.afterLog($a)
+          }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isWarnEnabled) {
             $underlying.warn($canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
             $canLogEv.afterLog($a)
@@ -146,7 +161,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isWarnEnabled($marker)) {
+          $underlying.warn($marker, $canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+          $canLogEv.afterLog($a)
+        }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isWarnEnabled($marker)) {
           $underlying.warn($marker, $canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
           $canLogEv.afterLog($a)
@@ -185,7 +205,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isInfoEnabled) {
+            $underlying.info($canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+            $canLogEv.afterLog($a)
+          }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isInfoEnabled) {
             $underlying.info($canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
             $canLogEv.afterLog($a)
@@ -222,7 +247,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isInfoEnabled($marker)) {
+          $underlying.info($marker, $canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+          $canLogEv.afterLog($a)
+        }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isInfoEnabled($marker)) {
           $underlying.info($marker, $canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
           $canLogEv.afterLog($a)
@@ -261,7 +291,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isDebugEnabled) {
+            $underlying.debug($canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+            $canLogEv.afterLog($a)
+          }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isDebugEnabled) {
             $underlying.debug($canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
             $canLogEv.afterLog($a)
@@ -298,7 +333,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isDebugEnabled($marker)) {
+          $underlying.debug($marker, $canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+          $canLogEv.afterLog($a)
+        }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isDebugEnabled($marker)) {
           $underlying.debug($marker, $canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
           $canLogEv.afterLog($a)
@@ -337,7 +377,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isTraceEnabled) {
+            $underlying.trace($canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+            $canLogEv.afterLog($a)
+          }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isTraceEnabled) {
             $underlying.trace($canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
             $canLogEv.afterLog($a)
@@ -374,7 +419,12 @@ private object LoggerTakingImplicitMacro {
     import c.universe._
     val underlying = q"${c.prefix}.underlying"
     val canLogEv = q"${c.prefix}.canLogEv"
-    if (args.length == 2) {
+    if (args.length == 1) {
+      q"""if ($underlying.isTraceEnabled($marker)) {
+          $underlying.trace($marker, $canLogEv.logMessage($message, $a), List(${args(0)}): _*)
+          $canLogEv.afterLog($a)
+        }"""
+    } else if (args.length == 2) {
       q"""if ($underlying.isTraceEnabled($marker)) {
           $underlying.trace($marker, $canLogEv.logMessage($message, $a), List(${args(0)}, ${args(1)}): _*)
           $canLogEv.afterLog($a)

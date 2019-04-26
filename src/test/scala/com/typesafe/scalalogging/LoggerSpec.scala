@@ -424,21 +424,21 @@ class LoggerSpec extends WordSpec with Matchers with MockitoSugar {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error(s"msg ${1}")
-      verify(underlying).error("msg {}", 1.asInstanceOf[AnyRef])
+      verify(underlying).error("msg {}", List(1.asInstanceOf[AnyRef]): _*)
     }
 
     "call the underlying format method with boxed versions of arguments of type Any" in {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error(s"msg ${1.asInstanceOf[Any]}")
-      verify(underlying).error("msg {}", 1.asInstanceOf[AnyRef])
+      verify(underlying).error("msg {}", List(1.asInstanceOf[AnyRef]): _*)
     }
 
     "call the underlying format method escaping literal format anchors" in {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error(s"foo {} bar $arg1")
-      verify(underlying).error("foo \\{} bar {}", arg1)
+      verify(underlying).error("foo \\{} bar {}", List(arg1): _*)
     }
 
     "call the underlying method without escaping format anchors when the message has no interpolations" in {
@@ -452,14 +452,14 @@ class LoggerSpec extends WordSpec with Matchers with MockitoSugar {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error(s"foo\nbar $arg1")
-      verify(underlying).error(s"foo\nbar {}", arg1)
+      verify(underlying).error(s"foo\nbar {}", List(arg1): _*)
     }
 
     "call the underlying format method when the interpolated string is triple quoted and contains escape sequences" in {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error(s"""foo\nbar $arg1""")
-      verify(underlying).error(s"""foo\nbar {}""", arg1)
+      verify(underlying).error(s"""foo\nbar {}""", List(arg1): _*)
     }
   }
 
@@ -468,14 +468,14 @@ class LoggerSpec extends WordSpec with Matchers with MockitoSugar {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error("foo {}, bar {}", arg4, arg5)
-      verify(underlying).error("foo {}, bar {}", Array(arg4ref, arg5ref): _*)
+      verify(underlying).error("foo {}, bar {}", List(arg4ref, arg5ref): _*)
     }
 
     "map args to AnyRef for non 2 args" in {
       val f = fixture(_.isErrorEnabled, isEnabled = true)
       import f._
       logger.error("foo {}", arg4)
-      verify(underlying).error("foo {}", arg4ref)
+      verify(underlying).error("foo {}", arg4)
       logger.error("foo {}, bar {}, {}", arg4, arg5, arg6)
       verify(underlying).error("foo {}, bar {}, {}", arg4ref, arg5ref, arg6ref)
     }
