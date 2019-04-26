@@ -19,8 +19,6 @@ final class LoggerTakingImplicit[A] private[scalalogging] (val underlying: Under
 
   def error(message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.errorMessageArgs[A]
 
-  def error(marker: Marker, message: String)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.errorMessageMarker[A]
-
   def error(marker: Marker, message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.errorMessageCauseMarker[A]
 
   def error(marker: Marker, message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.errorMessageArgsMarker[A]
@@ -32,8 +30,6 @@ final class LoggerTakingImplicit[A] private[scalalogging] (val underlying: Under
   def warn(message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.warnMessageCause[A]
 
   def warn(message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.warnMessageArgs[A]
-
-  def warn(marker: Marker, message: String)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.warnMessageMarker[A]
 
   def warn(marker: Marker, message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.warnMessageCauseMarker[A]
 
@@ -47,8 +43,6 @@ final class LoggerTakingImplicit[A] private[scalalogging] (val underlying: Under
 
   def info(message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.infoMessageArgs[A]
 
-  def info(marker: Marker, message: String)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.infoMessageMarker[A]
-
   def info(marker: Marker, message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.infoMessageCauseMarker[A]
 
   def info(marker: Marker, message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.infoMessageArgsMarker[A]
@@ -61,8 +55,6 @@ final class LoggerTakingImplicit[A] private[scalalogging] (val underlying: Under
 
   def debug(message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.debugMessageArgs[A]
 
-  def debug(marker: Marker, message: String)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.debugMessageMarker[A]
-
   def debug(marker: Marker, message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.debugMessageCauseMarker[A]
 
   def debug(marker: Marker, message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.debugMessageArgsMarker[A]
@@ -74,8 +66,6 @@ final class LoggerTakingImplicit[A] private[scalalogging] (val underlying: Under
   def trace(message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.traceMessageCause[A]
 
   def trace(message: String, args: Any*)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.traceMessageArgs[A]
-
-  def trace(marker: Marker, message: String)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.traceMessageMarker[A]
 
   def trace(marker: Marker, message: String, cause: Throwable)(implicit a: A): Unit = macro LoggerTakingImplicitMacro.traceMessageCauseMarker[A]
 

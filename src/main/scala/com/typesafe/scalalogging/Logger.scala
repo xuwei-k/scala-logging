@@ -106,8 +106,6 @@ final class Logger private (val underlying: Underlying) extends Serializable {
 
   def error(message: String, args: Any*): Unit = macro LoggerMacro.errorMessageArgs
 
-  def error(marker: Marker, message: String): Unit = macro LoggerMacro.errorMessageMarker
-
   def error(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.errorMessageCauseMarker
 
   def error(marker: Marker, message: String, args: Any*): Unit = macro LoggerMacro.errorMessageArgsMarker
@@ -121,8 +119,6 @@ final class Logger private (val underlying: Underlying) extends Serializable {
   def warn(message: String, cause: Throwable): Unit = macro LoggerMacro.warnMessageCause
 
   def warn(message: String, args: Any*): Unit = macro LoggerMacro.warnMessageArgs
-
-  def warn(marker: Marker, message: String): Unit = macro LoggerMacro.warnMessageMarker
 
   def warn(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.warnMessageCauseMarker
 
@@ -138,8 +134,6 @@ final class Logger private (val underlying: Underlying) extends Serializable {
 
   def info(message: String, args: Any*): Unit = macro LoggerMacro.infoMessageArgs
 
-  def info(marker: Marker, message: String): Unit = macro LoggerMacro.infoMessageMarker
-
   def info(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.infoMessageCauseMarker
 
   def info(marker: Marker, message: String, args: Any*): Unit = macro LoggerMacro.infoMessageArgsMarker
@@ -154,8 +148,6 @@ final class Logger private (val underlying: Underlying) extends Serializable {
 
   def debug(message: String, args: Any*): Unit = macro LoggerMacro.debugMessageArgs
 
-  def debug(marker: Marker, message: String): Unit = macro LoggerMacro.debugMessageMarker
-
   def debug(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.debugMessageCauseMarker
 
   def debug(marker: Marker, message: String, args: Any*): Unit = macro LoggerMacro.debugMessageArgsMarker
@@ -169,8 +161,6 @@ final class Logger private (val underlying: Underlying) extends Serializable {
   def trace(message: String, cause: Throwable): Unit = macro LoggerMacro.traceMessageCause
 
   def trace(message: String, args: Any*): Unit = macro LoggerMacro.traceMessageArgs
-
-  def trace(marker: Marker, message: String): Unit = macro LoggerMacro.traceMessageMarker
 
   def trace(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.traceMessageCauseMarker
 
